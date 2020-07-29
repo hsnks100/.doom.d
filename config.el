@@ -89,3 +89,7 @@
 (set-language-environment "Korean")
 (prefer-coding-system 'utf-8)
 (modify-syntax-entry ?_ "w")
+
+(after! evil-snipe
+  (evil-snipe-mode -1)
+  )
