@@ -92,4 +92,10 @@
 
 (after! evil-snipe
   (evil-snipe-mode -1)
+
+  )
+
+
+(after! company
+  (set-company-backend! 'prog-mode 'company-dabbrev)
   )
