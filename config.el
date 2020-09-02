@@ -59,36 +59,48 @@
       doom-unicode-font (font-spec :family "Fira Code" :size 20)
       doom-big-font (font-spec :family "Fira Code" :size 20))
 
-
-(define-key evil-normal-state-map (kbd "[") 'evil-scroll-up)
-(define-key evil-normal-state-map (kbd "]") 'evil-scroll-down)
-(define-key evil-visual-state-map (kbd "[") 'evil-scroll-up)
-(define-key evil-visual-state-map (kbd "]") 'evil-scroll-down)
-(define-key evil-normal-state-map (kbd "0") 'evil-first-non-blank)
-(define-key evil-visual-state-map (kbd "0") 'evil-first-non-blank)
-(global-set-key (kbd "C-h") 'evil-window-left)
-(global-set-key (kbd "C-l") 'evil-window-right)
-(global-set-key (kbd "C-j") 'evil-window-down)
-(global-set-key (kbd "C-k") 'evil-window-up)
-(define-key evil-normal-state-map "_" 'comment-line)
-(define-key evil-visual-state-map "_" 'comment-dwim)
-(define-key evil-normal-state-map (kbd ", w") 'buffer-menu)
-(define-key evil-normal-state-map (kbd "<up>") 'evil-window-increase-height)
-(define-key evil-normal-state-map (kbd "<down>") 'evil-window-decrease-height)
-(define-key evil-normal-state-map (kbd "<right>") 'evil-window-increase-width)
-(define-key evil-normal-state-map (kbd "<left>") 'evil-window-decrease-width)
-(define-key evil-normal-state-map (kbd "<f2>") 'neotree)
-(define-key evil-normal-state-map (kbd "g r") 'rgrep)
-(define-key evil-normal-state-map (kbd "; a") 'ff-find-other-file)
-(define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
-(define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
-(define-key evil-visual-state-map (kbd "j") 'evil-next-visual-line)
-(define-key evil-visual-state-map (kbd "k") 'evil-previous-visual-line)
-(define-key evil-normal-state-map ";a" 'ff-find-other-file)
-(define-key evil-normal-state-map (kbd "C-S-b") 'cmake-ide-compile)
-(set-language-environment "Korean")
 (prefer-coding-system 'utf-8)
-(modify-syntax-entry ?_ "w")
+(setq default-input-method "korean-hangul390")
+(setq default-korean-keyboard "390")
+
+
+(after! evil
+  (map!
+        :n  "[" #'evil-scroll-up
+        :n  "]" #'evil-scroll-down
+        :v  "[" #'evil-scroll-up
+        :v  "]" #'evil-scroll-down
+        )
+  ;; (define-key evil-normal-state-map (kbd "[") 'evil-scroll-up)
+  ;; (define-key evil-normal-state-map (kbd "]") 'evil-scroll-down)
+  ;; (define-key evil-visual-state-map (kbd "[") 'evil-scroll-up)
+  ;; (define-key evil-visual-state-m p (kbd "]") 'evil-scroll-down)
+  (define-key evil-normal-state-map (kbd "0") 'evil-first-non-blank)
+  (define-key evil-visual-state-map (kbd "0") 'evil-first-non-blank)
+  (global-set-key (kbd "C-h") 'evil-window-left)
+  (global-set-key (kbd "C-l") 'evil-window-right)
+  (global-set-key (kbd "C-j") 'evil-window-down)
+  (global-set-key (kbd "C-k") 'evil-window-up)
+  (define-key evil-insert-state-map (kbd "C-SPC") 'toggle-korean-input-method)
+  (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+  (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+  (define-key evil-normal-state-map "_" 'comment-line)
+  (define-key evil-visual-state-map "_" 'comment-dwim)
+  (define-key evil-normal-state-map (kbd ", w") 'buffer-menu)
+  (define-key evil-normal-state-map (kbd "<up>") 'evil-window-increase-height)
+  (define-key evil-normal-state-map (kbd "<down>") 'evil-window-decrease-height)
+  (define-key evil-normal-state-map (kbd "<right>") 'evil-window-increase-width)
+  (define-key evil-normal-state-map (kbd "<left>") 'evil-window-decrease-width)
+  (define-key evil-normal-state-map (kbd "<f2>") 'neotree)
+  (define-key evil-normal-state-map (kbd "g r") 'rgrep)
+  (define-key evil-normal-state-map (kbd "; a") 'ff-find-other-file)
+  (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+  (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+  (define-key evil-visual-state-map (kbd "j") 'evil-next-visual-line)
+  (define-key evil-visual-state-map (kbd "k") 'evil-previous-visual-line)
+  (define-key evil-normal-state-map ";a" 'ff-find-other-file)
+  (define-key evil-normal-state-map (kbd "C-S-b") 'cmake-ide-compile)
+  )
 
 (after! evil-snipe
   (evil-snipe-mode -1)
@@ -99,3 +111,18 @@
 (after! company
   (set-company-backend! 'prog-mode 'company-dabbrev)
   )
+
+
+;; key_word jdlksjlf
+
+(after! smartparens
+  (setq smartparens-global-mode -1)
+  (smartparens-global-mode -1)
+  )
+
+(add-hook 'after-change-major-mode-hook
+          (lambda ()
+            (modify-syntax-entry ?_ "w")
+            (smartparens-global-mode -1)
+            )
+          )
