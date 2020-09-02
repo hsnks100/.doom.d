@@ -126,3 +126,8 @@
             (smartparens-global-mode -1)
             )
           )
+(defun create-tags (dir-name)
+  "Create tags file."
+  (interactive "Directory: ")
+  (eshell-command
+   (format "find %s -type f -name \"*.*\" | etags -" dir-name)))
