@@ -131,3 +131,5 @@
   (interactive "Directory: ")
   (eshell-command
    (format "find %s -type f -name \"*.*\" | etags -" dir-name)))
+
+(setq jit-lock-defer-time 0.05)
